@@ -1,0 +1,18 @@
+version: "3.7"
+
+x-logging: &default-logging  
+  driver: "json-file"  
+  options:  
+    max-size: "10m"  # Max log file size, e.g., 10MB  
+    max-file: "3"    # Number of log files to keep
+
+services:
+  guest-service:
+    build: .
+    image: superset-guest-service
+    container_name: superset_guest_service
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file: .env
+    logging: *default-logging
