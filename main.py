@@ -1,13 +1,11 @@
-import logging
-
 from flask import Flask
 from flask_cors import CORS
 
 from common.config import PORT
 from app.api.routes import routes
+from utils.logger import setup_logger
 
-logging.basicConfig(level=logging.DEBUG,  # Set the logging level
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+setup_logger()
 
 app = Flask(__name__)
 

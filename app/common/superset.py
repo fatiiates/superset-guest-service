@@ -1,7 +1,7 @@
 import requests
 from requests.exceptions import RequestException
 from common.config import ENVIRONMENT, CSRF_URL, GUEST_TOKEN_URL
-from app.config.config import ApiConfig
+from app.common.config import ApiConfig
 
 def login(username, password):
     session = requests.Session()

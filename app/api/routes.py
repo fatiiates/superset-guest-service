@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, abort
-from app.config.superset import create_guest_token
+from app.common.superset import create_guest_token
 from utils.guest_token_payload import GuestTokenPayload
 
 routes = Blueprint('routes', __name__)
