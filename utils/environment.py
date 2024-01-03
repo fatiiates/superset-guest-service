@@ -15,3 +15,4 @@ class Environment(Enum):
             return Environment.PROD
         else:
             raise Exception(f"Invalid environment: {environment}")
+   

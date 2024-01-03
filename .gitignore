@@ -1,2 +1,4 @@
 venv
 .env
+superset-test
+common/config.py

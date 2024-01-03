@@ -87,4 +87,3 @@ class GuestTokenPayload:
         """Get the payload data."""
 
         return self.prepare_payload_data(parameters)
-    

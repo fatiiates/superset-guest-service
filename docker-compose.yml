@@ -5,9 +5,13 @@ x-logging: &default-logging
   options:  
     max-size: "10m"  # Max log file size, e.g., 10MB  
     max-file: "3"    # Number of log files to keep
+    
+x-guest-service-volumes:
+  &guest-service-volumes 
+  - ./common/config.py:/app/common/config.py:ro
 
 services:
-  guest-service:
+  superset-guest-service:
     build: .
     image: superset-guest-service
     container_name: superset_guest_service
@@ -15,4 +19,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     env_file: .env
+    ports:
+      - ${PORT}:${PORT}
+    volumes: *guest-service-volumes
     logging: *default-logging

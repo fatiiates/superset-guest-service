@@ -1,6 +1,6 @@
 import requests
 from requests.exceptions import RequestException
-from common.config import ENVIRONMENT, CSRF_URL, GUEST_TOKEN_URL, LOGIN_URL
+from common.config import ENVIRONMENT, CSRF_URL, GUEST_TOKEN_URL
 from app.config.config import ApiConfig
 
 def login(username, password):
@@ -17,12 +17,17 @@ def login(username, password):
 
     response = session.post(url, json=payload, verify=verify_option)
     response.raise_for_status()
+    access_token = response.json().get('access_token')
     
+    session.headers['Authorization'] = f"Bearer {access_token}"
+    session.headers['Content-Type'] = 'application/json'
+
     return session
 
 def fetch_csrf_token(session):
     try:
-        csrf_res = session.get(CSRF_URL, verify=False)
+        verify_option = ApiConfig.get_verify_option(ENVIRONMENT)
+        csrf_res = session.get(CSRF_URL, verify=verify_option)
         csrf_res.raise_for_status()
     except RequestException as e:
         raise Exception(f"Error fetching CSRF token: {e}")
@@ -39,7 +44,8 @@ def create_guest_token(data=None):
         session.headers['Referer'] = CSRF_URL
         session.headers['X-CSRFToken'] = csrf_token
 
-        response = session.post(GUEST_TOKEN_URL, json=data, verify=False)
+        verify_option = ApiConfig.get_verify_option(ENVIRONMENT)
+        response = session.post(GUEST_TOKEN_URL, json=data, verify=verify_option)
         response.raise_for_status()
         session.close()
     except RequestException as e:

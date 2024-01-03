@@ -32,6 +32,7 @@ def get_guest_token():
 
         guest_token = create_guest_token(data)
 
-        return jsonify(guestToken=guest_token)
+        return jsonify(guest_token=guest_token)
+    
     except Exception as e:
         abort(500, str(e))
