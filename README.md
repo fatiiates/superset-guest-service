@@ -61,11 +61,14 @@ Superset Guest Service is a lightweight middleware that employs the connector pa
     def get_guest_token():
         company_id = request.args.get('company_id')
 
+        # created data dictionary
         parameters = {
             "company_id": company_id
         }
 
         payload = GuestTokenPayload()
+
+        # get payload data with dynamic RLS rules
         data = payload.get_payload_data(parameters)
 
         guest_token = create_guest_token(data)
