@@ -20,7 +20,7 @@ Superset Guest Service is a lightweight middleware that employs the connector pa
 > [!NOTE]
 > `GuestTokenPayload` was designed using Singleton.  
 
-- You can update user information via initializer.
+- Update user information via initializer.
 
     ```python
     PAYLOAD.initialize(
@@ -32,7 +32,7 @@ Superset Guest Service is a lightweight middleware that employs the connector pa
     )
     ```
 
-- You must update RESOURCES variable according to your Superset resources.
+- **MUST** update RESOURCES variable according to your Superset resources.
 
     ```python
     RESOURCES = {
@@ -42,8 +42,8 @@ Superset Guest Service is a lightweight middleware that employs the connector pa
     }
     ```
 
-- Also you have to update RLS_RULES variable according to your needs.
-- They are callable functions that return a dictionary. It CAN include `dataset` key but it MUST include the `clause` key. For more information, you can find the API documentation below.
+- **MUST** update RLS_RULES variable according to your needs.
+- They are callable functions that return a dictionary. It **CAN** include `dataset` key but it **MUST** include the `clause` key. For more information, you can find the API documentation below.
 - Callable functions takes `data` parameter which is a dictionary. This gives the opportunity to create dynamic rules. You can create it this dictionary variable in your api endpoints using path parameters and so on, like below.
 
     ```python
