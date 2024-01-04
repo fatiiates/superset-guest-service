@@ -9,11 +9,14 @@ Superset Guest Service is a lightweight middleware that employs the connector pa
 
 # Run
 
-:warning **Note:** For testing alerts.
+> [!NOTE]
+> test
 
 - Clone the repository
 - Copy the `.env.example` file to `.env` and update the environment variables accordingly
 - Copy the `common/config.example.py` file to `common/config.py` and update the configuration accordingly
+    > [!NOTE]
+    > test
     - :info `GuestTokenPayload` was designed using Singleton. You can update user information via initializer.
     ```python
         PAYLOAD.initialize(
