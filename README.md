@@ -32,14 +32,12 @@ Superset Guest Service is a lightweight middleware that employs the connector pa
     )
     ```
 
-- **MUST** update RESOURCES variable according to your Superset resources.
+- CAN update RESOURCES variable according to your Superset resources.
 
     ```python
-    RESOURCES = {
-        Environment.DEV: [
-            {"type": "dashboard", "id": "9b22e158-4d5d-435f-90d6-f5b46d1d53f0"}
-        ],
-    }
+    RESOURCES = [
+        {"type": "dashboard", "id": "9b22e158-4d5d-435f-90d6-f5b46d1d53f0"}
+    ]
     ```
 
 - **MUST** update RLS_RULES variable according to your needs.
@@ -49,11 +47,9 @@ Superset Guest Service is a lightweight middleware that employs the connector pa
     ```python
     # in common/config.py
 
-    RLS_RULES = {
-        Environment.DEV: [
-            lambda data: { "dataset": 23, "clause": f"company_id = {data.get('company_id')}" },
-        ],
-    }
+    RLS_RULES = [
+        lambda data: { "dataset": 23, "clause": f"company_id = {data.get('company_id')}" },
+    ]
 
     # in app/api/routes.py
 
@@ -71,7 +67,12 @@ Superset Guest Service is a lightweight middleware that employs the connector pa
         # get payload data with dynamic RLS rules
         data = payload.get_payload_data(parameters)
 
-        guest_token = create_guest_token(data)
+        """
+        it creates guest token with dashboard you defined in config.py
+        you can create resources automatically with canhing 
+        "auto_generate_resources" parameter to True
+        """ 
+        guest_token = create_guest_token(data, auto_generate_resources=False)
 
         return jsonify(guest_token=guest_token)
     ```

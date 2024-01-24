@@ -1,9 +1,10 @@
 import logging
-import os
-from utils.environment import Environment
+from common.config import LOG_LEVEL
 
 def setup_logger():
-    LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO').upper()
+    global LOG_LEVEL
+
+    LOG_LEVEL = LOG_LEVEL.upper()
 
     if LOG_LEVEL == 'DEBUG':
         LOG_LEVEL = logging.DEBUG

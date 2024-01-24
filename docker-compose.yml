@@ -20,6 +20,6 @@ services:
       - "host.docker.internal:host-gateway"
     env_file: .env
     ports:
-      - ${PORT}:${PORT}
+      - ${GUEST_SERVICE_PORT}:${GUEST_SERVICE_PORT}
     volumes: *guest-service-volumes
     logging: *default-logging

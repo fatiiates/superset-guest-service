@@ -16,9 +16,9 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy every content from the local file to the image  
 COPY . /app  
   
-ENV PORT=8080
+ENV GUEST_SERVICE_PORT=8080
 
-EXPOSE $PORT
+EXPOSE $GUEST_SERVICE_PORT
 
 # Set the main command to run with Gunicorn
-CMD exec gunicorn main:app --bind 0.0.0.0:$PORT --workers=4 --log-level=info
+CMD exec gunicorn main:app --bind 0.0.0.0:$GUEST_SERVICE_PORT --workers=$GUEST_SERVICE_WORKERS --log-level=$GUEST_SERVICE_LOG_LEVEL
