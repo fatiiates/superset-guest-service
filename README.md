@@ -48,7 +48,8 @@ Superset Guest Service is a lightweight middleware that employs the connector pa
     # in common/config.py
 
     RLS_RULES = [
-        lambda data: { "dataset": 23, "clause": f"company_id = {data.get('company_id')}" },
+        # lambda data: { "dataset": 23, "clause": f"company_id = {data.get('company_id')}" },
+        lambda data: {"clause": f"company_id = {data.get('company_id')}"},
     ]
 
     # in app/api/routes.py
